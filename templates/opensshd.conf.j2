@@ -250,7 +250,7 @@ RevokedKeys /etc/ssh/revoked_keys
 Subsystem sftp internal-sftp -l INFO -f LOCAL6 -u {{ sftp_umask }}
 
 # These lines must appear at the *end* of sshd_config
-Match Group sftponly
+Match Group {{ sftp_group }}
     ForceCommand internal-sftp -l INFO -f LOCAL6 -u {{ sftp_umask }}
 {% if sftp_chroot %}
     ChrootDirectory {{ sftp_chroot_dir }}
