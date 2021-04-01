@@ -150,6 +150,8 @@ ssh_print_debian_banner: false      # sshd (Debian OS family only)
 
 # true to enable sftp configuration
 sftp_enabled: false
+
+# change default sftp group
 sftp_group: sftponly
 
 # false to disable sftp chroot
@@ -157,6 +159,13 @@ sftp_chroot: true
 
 # sftp default umask
 sftp_umask: '0027'
+
+# sftp default match group rules
+sftp_rules:
+  - AllowTcpForwarding no
+  - AllowAgentForwarding no
+  - PermitRootLogin no
+  - X11Forwarding no
 
 # change default sftp chroot location
 sftp_chroot_dir: /home/%u

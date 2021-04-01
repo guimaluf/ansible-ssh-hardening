@@ -252,14 +252,13 @@ Subsystem sftp internal-sftp -l INFO -f LOCAL6 -u {{ sftp_umask }}
 # These lines must appear at the *end* of sshd_config
 Match Group {{ sftp_group }}
     ForceCommand internal-sftp -l INFO -f LOCAL6 -u {{ sftp_umask }}
-{% if sftp_chroot %}
+  {% if sftp_chroot %}
     ChrootDirectory {{ sftp_chroot_dir }}
-{% endif %}
-    AllowTcpForwarding no
-    AllowAgentForwarding no
+  {% endif %}
+  {% for rule in sftp_rules %}
+    {{ rule | indent(4) }}
+  {% endfor %}
     PasswordAuthentication {{ 'yes' if (ssh_server_password_login|bool) else 'no' }}
-    PermitRootLogin no
-    X11Forwarding no
 {% endif %}
 {% if ssh_server_match_address %}
 
